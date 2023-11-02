@@ -4,7 +4,7 @@ void main() async {
   final dbService = DatabaseService();
 
   try {
-    final results = await dbService.getProducts();
+    final results = await dbService.getOrders();
 
     for (var result in results) {
       print(result);
