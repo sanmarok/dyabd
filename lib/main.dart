@@ -22,8 +22,7 @@ class _MyAppState extends State<MyApp> {
     super.initState();
     // Inicializa clientsFuture y ordersFuture al cargar la pantalla.
     clientsFuture = widget.dbService.getClients();
-    ordersFuture = widget.dbService
-        .getOrders(); // Utiliza el método getOrders para obtener la lista de pedidos.
+    ordersFuture = widget.dbService.getOrders(); // Utiliza el método getOrders para obtener la lista de pedidos.
   }
 
   @override
@@ -46,23 +45,19 @@ class _MyAppState extends State<MyApp> {
                   children: [
                     Text(
                       'Clientes',
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     // Columna para mostrar la lista de clientes
                     FutureBuilder(
                       future: clientsFuture,
                       builder: (context, snapshot) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
+                        if (snapshot.connectionState == ConnectionState.waiting) {
                           return Center(child: CircularProgressIndicator());
                         } else if (snapshot.hasError) {
-                          return Center(
-                              child: Text('Error: ${snapshot.error}'));
+                          return Center(child: Text('Error: ${snapshot.error}'));
                         } else {
                           List<Map<String, dynamic>> clients =
-                              (snapshot.data as List<Map<String, dynamic>>?) ??
-                                  [];
+                              (snapshot.data as List<Map<String, dynamic>>?) ?? [];
                           return ListView.builder(
                             shrinkWrap: true,
                             itemCount: clients.length,
@@ -85,23 +80,19 @@ class _MyAppState extends State<MyApp> {
                   children: [
                     Text(
                       'Pedidos',
-                      style:
-                          TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     // Columna para mostrar la lista de pedidos
                     FutureBuilder(
                       future: ordersFuture,
                       builder: (context, snapshot) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
+                        if (snapshot.connectionState == ConnectionState.waiting) {
                           return Center(child: CircularProgressIndicator());
                         } else if (snapshot.hasError) {
-                          return Center(
-                              child: Text('Error: ${snapshot.error}'));
+                          return Center(child: Text('Error: ${snapshot.error}'));
                         } else {
                           List<Map<String, dynamic>> orders =
-                              (snapshot.data as List<Map<String, dynamic>>?) ??
-                                  [];
+                              (snapshot.data as List<Map<String, dynamic>>?) ?? [];
                           return ListView.builder(
                             shrinkWrap: true,
                             itemCount: orders.length,
