@@ -17,6 +17,7 @@ if ($conn->connect_error) {
 
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -101,7 +102,7 @@ if ($conn->connect_error) {
                                                             echo "<td>" . $row['idCliente'] . "</td>";
                                                             echo "<td>
                                                                 <a href='#' class='btn btn-info'><i class='fas fa-search'></i></a>
-                                                                <a href='#' class='btn btn-danger'><i class='fas fa-trash'></i></a>
+                                                                <a href='#' class='btn btn-danger'><i class='fas fa-edit'></i></a>
                                                             </td>";
                                                             echo "</tr>";
                                                         }
@@ -156,7 +157,7 @@ if ($conn->connect_error) {
                                                             echo "<td>" . $rowClientes['dni'] . "</td>";
                                                             echo "<td>
                                                                 <a href='#' class='btn btn-info'><i class='fas fa-search'></i></a>
-                                                                <a href='#' class='btn btn-danger'><i class='fas fa-trash'></i></a>
+                                                                <a href='#' class='btn btn-danger'><i class='fas fa-edit'></i></a>
                                                             </td>";
                                                             echo "</tr>";
                                                         }
