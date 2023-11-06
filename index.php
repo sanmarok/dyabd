@@ -8,6 +8,7 @@ $username = "dbadmin";
 $password = ".admindb";
 $database = "grupo1";
 
+
 $conn = new mysqli($servername, $username, $password, $database);
 
 if ($conn->connect_error) {
@@ -102,7 +103,7 @@ if ($conn->connect_error) {
                                                             echo "<td>" . $row['idCliente'] . "</td>";
                                                             echo "<td>
                                                                 <a href='#' class='btn btn-info'><i class='fas fa-search'></i></a>
-                                                                <a href='#' class='btn btn-danger'><i class='fas fa-edit'></i></a>
+                                                                <a href='editar_pedido.php?id=" . $row['idPedido'] . "' class='btn btn-danger'><i class='fas fa-edit'></i></a>
                                                             </td>";
                                                             echo "</tr>";
                                                         }
@@ -157,7 +158,8 @@ if ($conn->connect_error) {
                                                             echo "<td>" . $rowClientes['dni'] . "</td>";
                                                             echo "<td>
                                                                 <a href='#' class='btn btn-info'><i class='fas fa-search'></i></a>
-                                                                <a href='#' class='btn btn-danger'><i class='fas fa-edit'></i></a>
+                                                                <a href='editar_cliente.php?id=" . $rowClientes['idCliente'] . "' class='btn btn-danger'><i class='fas fa-edit'></i></a>
+                                                                
                                                             </td>";
                                                             echo "</tr>";
                                                         }
