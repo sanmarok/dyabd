@@ -90,7 +90,7 @@ if ($conn->connect_error) {
                   <div class="form-group">
                     <label for="idCliente">Clientes</label>
                     <select class="form-control" name="idCliente" id="idCliente">
-                      <option value="">Seleccione un cliente</option>
+                      <option value="" disabled selected>Seleccione un cliente</option>
                       <?php
                       $resultClientes = $conn->query('SELECT * FROM Clientes');
                       while ($rowClientes = $resultClientes->fetch_assoc()) {
