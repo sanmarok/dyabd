@@ -26,7 +26,8 @@ if ($conn->connect_error) {
   <title>Gestor de base de datos</title>
 
   <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
   <!-- Theme style -->
@@ -100,11 +101,13 @@ if ($conn->connect_error) {
                   </div>
                   <div class="form-group">
                     <label for="direccion_pedido">Direccion</label>
-                    <input type="text" class="form-control" name="direccion_pedido" id="direccion_pedido" placeholder="Ingrese la dirección del pedido">
+                    <input type="text" class="form-control" name="direccion_pedido" id="direccion_pedido"
+                      placeholder="Ingrese la dirección del pedido">
                   </div>
                   <div class="form-group">
                     <label for="fecha_pedido">Fecha</label>
-                    <input type="date" class="form-control" name="fecha_pedido" id="fecha_pedido" placeholder="Ingrese la fecha">
+                    <input type="date" class="form-control" name="fecha_pedido" id="fecha_pedido"
+                      placeholder="Ingrese la fecha">
                   </div>
                   <div class="form-group">
                     <label for="estado_pedido">Estado</label>
@@ -116,7 +119,8 @@ if ($conn->connect_error) {
                   </div>
                   <div class="form-group">
                     <label for="detalle_pedido">Detalle</label>
-                    <input type="text" class="form-control" name="detalle_pedido" id="detalle_pedido" placeholder="Ingrese el detalle del pedido">
+                    <input type="text" class="form-control" name="detalle_pedido" id="detalle_pedido"
+                      placeholder="Ingrese el detalle del pedido">
                   </div>
                 </div>
 
@@ -133,28 +137,29 @@ if ($conn->connect_error) {
                   $detalle_pedido = $_POST['detalle_pedido'];
                   $idCliente = $_POST['idCliente'];
 
-                  $query = "INSERT INTO pedidos(direccion, fecha_pedido, estado, detalle, IdCliente) 
+                  $query = "INSERT INTO Pedidos(direccion, fecha_pedido, estado, detalle, IdCliente) 
                   VALUES ('$direccion_pedido','$fecha_pedido','$estado_pedido','$detalle_pedido','$idCliente')";
-                  $stmt = $conn->prepare($query);
-                  if ($stmt->execute()) {
-                    echo '<script>
-                      Swal.fire({
-                        title: "Éxito!",
-                        text: "Se agregó exitosamente el pedido.",
-                        icon: "success"
-                      });
-                      window.location.href = "index.php";
-                    </script>';
+                  if ($conn->real_query($query) == TRUE) {
+                    echo
+                      '<script>
+                          Swal.fire({
+                          title: "Éxito!",
+                          text: "Se agregó exitosamente el pedido.",
+                          icon: "success"
+                          });
+                      </script>';
                   } else {
-                    echo '<script>
-                      Swal.fire({
-                        title: "Error",
-                        text: "Hubo un error al intentar agregar el pedido.",
-                        icon: "error"
-                      });
-                    </script>';
+                    echo
+                      '<script>
+                          Swal.fire({
+                          title: "Error",
+                          text: "Hubo un error al intentar agregar el pedido.",
+                          icon: "error"
+                          });
+                      </script>';
                   }
                   $stmt->close();
+                  $conn->close();
                 }
                 ?>
               </form>
