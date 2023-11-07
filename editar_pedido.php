@@ -1,23 +1,24 @@
 <?php
-// conexion
+// Configuración de la conexión a la base de datos
 $servername = "localhost";
-$username = "dbadmin";
-$password = ".admindb";
+$username = "root";
+$password = "";
 $database = "grupo1";
+
 
 // Crear conexión
 $conn = new mysqli($servername, $username, $password, $database);
 
-// testeo conexión
+// Checar conexión
 if ($conn->connect_error) {
     die("Conexión fallida: " . $conn->connect_error);
 }
 
 // Inicializar variables
-$estado = $direccion = $detalle =  "";
+$estado = $direccion = $detalle = "";
 $pedidoId = isset($_GET['id']) ? $_GET['id'] : '';
 
-// Obtener datos del pedido por idd
+// Obtener datos del pedido si el ID es válido
 if ($pedidoId) {
     $stmt = $conn->prepare("SELECT * FROM Pedidos WHERE idPedido = ?");
     $stmt->bind_param("i", $pedidoId);
@@ -35,13 +36,13 @@ if ($pedidoId) {
 }
 
 // Procesar datos del formulario al recibirlos
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['actualizar'])) {
     $direccion = $_POST['direccion'];
     $estado = $_POST['estado'];
     $detalle = $_POST['detalle'];
 
-    $stmt = $conn->prepare("UPDATE Pedidos SET direccion = ?, estado = ?, detalle = ? WHERE idPedido = ?");  #preparas para actualizar estos datos de la table
-    $stmt->bind_param("sssi", $direccion, $estado, $detalle, $pedidoId);   #numero de variables llamadas 3 string y 1 integer (s s s i)
+    $stmt = $conn->prepare("UPDATE Pedidos SET direccion = ?, estado = ?, detalle = ? WHERE idPedido = ?");
+    $stmt->bind_param("sssi", $direccion, $estado, $detalle, $pedidoId);
     if ($stmt->execute()) {
         echo "Pedido actualizado con éxito.";
         // header("Location: lista_pedidos.php"); // Descomentar para redireccionar
@@ -85,10 +86,14 @@ $conn->close();
                                     <option value="Pendiente" <?php echo $estado == 'Pendiente' ? 'selected' : ''; ?>>Pendiente</option>
                                     <option value="Enviado" <?php echo $estado == 'Enviado' ? 'selected' : ''; ?>>Enviado</option>
                                     <option value="Entregado" <?php echo $estado == 'Entregado' ? 'selected' : ''; ?>>Entregado</option>
-                                    <!-- Añade más estados según sea necesario -->
                                 </select>
                             </div>
-                            <button type="submit" class="btn btn-primary">Actualizar Pedido</button>
+                            <button type="submit" name="actualizar" class="btn btn-primary">Actualizar Pedido</button>
+                        </form>
+                        <!-- Botón para eliminar pedido -->
+                        <form method="post" action="borrar_pedido.php">
+                            <input type="hidden" name="idPedido" value="<?php echo $pedidoId; ?>">
+                            <button type="submit" class="btn btn-danger mt-2" onclick="return confirm('¿Estás seguro de que quieres borrar este pedido?');">Borrar Pedido</button>
                         </form>
                     </div>
                 </div>
