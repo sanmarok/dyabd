@@ -95,13 +95,14 @@ if ($conn->connect_error) {
                                                     // Verificar si hay resultados
                                                     if ($result->num_rows > 0) {
                                                         while ($row = $result->fetch_assoc()) {
+                                                            $pedidoID = $row['idPedido']; 
                                                             echo "<tr>";
                                                             echo "<td><a href='pages/examples/invoice.html'>" . $row['idPedido'] . "</a></td>";
                                                             echo "<td>" . $row['direccion'] . "</td>";
                                                             echo "<td><span class='badge badge-success'>" . $row['estado'] . "</span></td>";
                                                             echo "<td>" . $row['idCliente'] . "</td>";
                                                             echo "<td>
-                                                                <a href='#' class='btn btn-info'><i class='fas fa-search'></i></a>
+                                                                <a href='perfil_pedido.php?id=$pedidoID; ?>' class='btn btn-info'><i class='fas fa-search'></i></a>
                                                                 <a href='#' class='btn btn-danger'><i class='fas fa-edit'></i></a>
                                                             </td>";
                                                             echo "</tr>";
@@ -150,13 +151,15 @@ if ($conn->connect_error) {
                                                     // Verificar si hay resultados
                                                     if ($resultClientes->num_rows > 0) {
                                                         while ($rowClientes = $resultClientes->fetch_assoc()) {
+                                                            $clienteID = $rowClientes['idCliente'];
                                                             echo "<tr>";
                                                             echo "<td>" . $rowClientes['idCliente'] . "</td>";
                                                             echo "<td>" . $rowClientes['nombres'] . "</td>";
                                                             echo "<td>" . $rowClientes['apellidos'] . "</td>";
                                                             echo "<td>" . $rowClientes['dni'] . "</td>";
                                                             echo "<td>
-                                                                <a href='#' class='btn btn-info'><i class='fas fa-search'></i></a>
+                                                               
+                                                               <a href='perfil_cliente.php?id=$clienteID' class='btn btn-info'><i class='fas fa-search'></i></a>
                                                                 <a href='#' class='btn btn-danger'><i class='fas fa-edit'></i></a>
                                                             </td>";
                                                             echo "</tr>";
