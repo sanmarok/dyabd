@@ -117,11 +117,9 @@ if ($conn->connect_error) {
                     $email_cliente = $_POST['email_cliente'];
                     $fecha_registro = date("Y-m-d");
 
-                    $query = "INSERT INTO clientes(nombres,apellidos,dni,telefono,email,fecha_registro) 
+                    $query = "INSERT INTO Clientes(nombres,apellidos,dni,telefono,email,fecha_registro) 
                     VALUES ('$nombre_cliente','$apellido_cliente','$dni_cliente','$telefono_cliente','$email_cliente','$fecha_registro')";
-                    $stmt = $conn->prepare($query);
-
-                    if ($stmt->execute()) {
+                    if ($conn->real_query($query) == TRUE) {
                       echo '<script>
                       Swal.fire({
                         title: "Exito!",
