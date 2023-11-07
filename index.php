@@ -130,7 +130,7 @@ if ($conn->connect_error) {
                                     </div>
                                     <!-- /.card-header -->
                                     <div class="card-body p-0">
-                                        <div class "table-responsive">
+                                        <div class = "table-responsive">
                                             <table class="table m-0">
                                                 <thead>
                                                     <tr>
@@ -171,7 +171,7 @@ if ($conn->connect_error) {
                                         <!-- /.table
 
                                         </div>
-                                        <!-- /.table-responsive -->
+                                        <!-table-responsive -->
                                     </div>
                                     <!-- /.card-body -->
                                 </div>
