@@ -4,8 +4,8 @@ header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
 
 $servername = "localhost";
-$username = "dbadmin";
-$password = ".admindb";
+$username = "root";
+$password = "";
 $database = "grupo1";
 
 $conn = new mysqli($servername, $username, $password, $database);
@@ -18,7 +18,7 @@ $query = "SELECT * FROM clientes";
 $clientes = $conn->query($query);
 ?>
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 
 <head>
   <meta charset="utf-8">
@@ -26,7 +26,8 @@ $clientes = $conn->query($query);
   <title>Gestor de base de datos</title>
 
   <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
   <!-- Theme style -->
@@ -60,6 +61,7 @@ $clientes = $conn->query($query);
     <!-- /.sidebar-menu -->
   </div>
   <!-- /.sidebar -->
+  </aside>
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -94,21 +96,26 @@ $clientes = $conn->query($query);
                     <select class="form-control" name="idCliente" id="idCliente">
                       <option value="">Seleccione un cliente</option>
                       <?php while ($cliente = $clientes->fetch_assoc()) { ?>
-                        <!-- <option value="<?php echo $cliente['idCliente']; ?>"><?php echo $cliente['nombres'] . "" . $cliente['apellidos']; ?></option> -->
+                        <option value="<?php echo $cliente['idCliente']; ?>">
+                          <?php echo $cliente['nombres'] . "" . $cliente['apellidos'] ?>
+                        </option>
                       <?php } ?>
                     </select>
                   </div>
                   <div class="form-group">
                     <label for="direccion_pedido">Direccion</label>
-                    <input type="text" class="form-control" name="direccion_pedido" id="direccion_pedido" placeholder="Ingrese la direccion del pedido">
+                    <input type="text" class="form-control" name="direccion_pedido" id="direccion_pedido"
+                      placeholder="Ingrese la direccion del pedido">
                   </div>
                   <div class="form-group">
                     <label for="fecha_pedido">Fecha</label>
-                    <input type="date" class="form-control" name="fecha_pedido" id="fecha_pedido" placeholder="Ingrese la fecha">
+                    <input type="date" class="form-control" name="fecha_pedido" id="fecha_pedido"
+                      placeholder="Ingrese la fecha">
                   </div>
                   <div class="form-group">
                     <label for="estado_pedido">Estado</label>
-                    <select type="list" class="form-control" name="estado_pedido" id="estado_pedido" placeholder="Ingrese el estado del pedido">
+                    <select type="list" class="form-control" name="estado_pedido" id="estado_pedido"
+                      placeholder="Ingrese el estado del pedido">
                       <option value="Pendiente">Pendiente</option>
                       <option value="En proceso">En proceso</option>
                       <option value="Entregado">Entregado</option>
@@ -133,35 +140,29 @@ $clientes = $conn->query($query);
                   $detalle_pedido = $_POST['detalle_pedido'];
                   $idCliente = $_POST['idCliente'];
 
-                  if ($_SERVER["REQUEST_METHOD"] == "POTS") {
-                    $query = "INSERT INTO pedidos(direccion, fecha_pedido,estado,detalle,IdCliente) 
-                    VALUES (?,?,?,?,?)";
-                    $stmt = $conn->prepare($query);
-                    $stmt->bind_param("s", $direccion);
-                    $stmt->bind_param("s", $fecha_pedido);
-                    $stmt->bind_param("s", $estado_pedido);
-                    $stmt->bind_param("s", $detalle_pedido);
-                    $stmt->bind_param("i", $idCliente);
-
-                    if ($stmt->execute()) {
-                      echo '<script>
-                        Swal.fire({
-                          title: "Exito!",
-                          text: "Se agrego exitosamente el cliente.",
-                          icon: "success"
-                        });
+                  $query = "INSERT INTO pedidos(direccion, fecha_pedido,estado,detalle,IdCliente) 
+                  VALUES ('$direccion_pedido','$fecha_pedido','$estado_pedido','$detalle_pedido','$idCliente')";
+                  $stmt = $conn->prepare($query);
+                  if ($stmt->execute()) {
+                    echo '<script>
+                      Swal.fire({
+                        title: "Exito!",
+                        text: "Se agrego exitosamente el cliente.",
+                        icon: "success"
+                      });
+                      window.location: 
+                    </script>';
+                  } else {
+                    echo '<script>
+                      Swal.fire({
+                        title: "Error",
+                        text: "Hubo un error al intentar agregar al cliente.",
+                        icon: "error"
+                      });
                       </script>';
-                    } else {
-                      echo '<script>
-                        Swal.fire({
-                          title: "Error",
-                          text: "Hubo un error al intentar agregar al cliente.",
-                          icon: "error"
-                          });
-                      </script>';
-                    }
-                    $stmt->close();
+                    header("Location: http://localhost/dyabd/index.php");
                   }
+                  $stmt->close();
                   $conn->close();
                 }
                 ?>
