@@ -97,17 +97,17 @@ if ($conn->connect_error) {
                       while ($rowClientes = $resultClientes->fetch_assoc()) {
                         echo '<option value=' . $rowClientes['idCliente'] . '>' . $rowClientes['nombres'] . " " . $rowClientes['apellidos'] . '</option>';
                       } ?>
-                    </select>
+                    </select required>
                   </div>
                   <div class="form-group">
                     <label for="direccion_pedido">Direccion</label>
                     <input type="text" class="form-control" name="direccion_pedido" id="direccion_pedido"
-                      placeholder="Ingrese la dirección del pedido">
+                      placeholder="Ingrese la dirección del pedido" required>
                   </div>
                   <div class="form-group">
                     <label for="fecha_pedido">Fecha</label>
                     <input type="date" class="form-control" name="fecha_pedido" id="fecha_pedido"
-                      placeholder="Ingrese la fecha">
+                      placeholder="Ingrese la fecha" required>
                   </div>
                   <div class="form-group">
                     <label for="estado_pedido">Estado</label>
@@ -120,7 +120,7 @@ if ($conn->connect_error) {
                   <div class="form-group">
                     <label for="detalle_pedido">Detalle</label>
                     <input type="text" class="form-control" name="detalle_pedido" id="detalle_pedido"
-                      placeholder="Ingrese el detalle del pedido">
+                      placeholder="Ingrese el detalle del pedido" required>
                   </div>
                 </div>
 
