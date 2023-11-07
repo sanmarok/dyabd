@@ -26,8 +26,7 @@ $clientes = $conn->query($query);
   <title>Gestor de base de datos</title>
 
   <!-- Google Font: Source Sans Pro -->
-  <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
   <!-- Theme style -->
@@ -104,18 +103,15 @@ $clientes = $conn->query($query);
                   </div>
                   <div class="form-group">
                     <label for="direccion_pedido">Direccion</label>
-                    <input type="text" class="form-control" name="direccion_pedido" id="direccion_pedido"
-                      placeholder="Ingrese la direccion del pedido">
+                    <input type="text" class="form-control" name="direccion_pedido" id="direccion_pedido" placeholder="Ingrese la direccion del pedido">
                   </div>
                   <div class="form-group">
                     <label for="fecha_pedido">Fecha</label>
-                    <input type="date" class="form-control" name="fecha_pedido" id="fecha_pedido"
-                      placeholder="Ingrese la fecha">
+                    <input type="date" class="form-control" name="fecha_pedido" id="fecha_pedido" placeholder="Ingrese la fecha">
                   </div>
                   <div class="form-group">
                     <label for="estado_pedido">Estado</label>
-                    <select type="list" class="form-control" name="estado_pedido" id="estado_pedido"
-                      placeholder="Ingrese el estado del pedido">
+                    <select type="list" class="form-control" name="estado_pedido" id="estado_pedido" placeholder="Ingrese el estado del pedido">
                       <option value="Pendiente">Pendiente</option>
                       <option value="En proceso">En proceso</option>
                       <option value="Entregado">Entregado</option>
