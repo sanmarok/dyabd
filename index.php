@@ -4,8 +4,8 @@ header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
 
 $servername = "localhost";
-$username = "dbadmin";
-$password = ".admindb";
+$username = "root";
+$password = "";
 $database = "grupo1";
 
 $conn = new mysqli($servername, $username, $password, $database);
@@ -23,7 +23,8 @@ if ($conn->connect_error) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Gestor de base de datos</title>
     <!-- Google Font: Source Sans Pro -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
     <!-- overlayScrollbars -->
@@ -69,9 +70,10 @@ if ($conn->connect_error) {
                                 <div class="card">
                                     <div class="card-header border-transparent">
                                         <h3 class="card-title">Pedidos recientes</h3>
-                                        <a href="agregar_pedido.php" class="btn btn-success float-right">
+                                        <<<<<<< HEAD <a href="http://190.114.204.8/phpuser/db_grupo1/agregra_peido.php"
+                                            class="btn btn-success float-right">
                                             <i class="fas fa-plus"></i>
-                                        </a>
+                                            </a>
                                     </div>
                                     <!-- /.card-header -->
                                     <div class="card-body p-0">
@@ -102,7 +104,7 @@ if ($conn->connect_error) {
                                                             echo "<td>" . $row['idCliente'] . "</td>";
                                                             echo "<td>
                                                                 <a href='#' class='btn btn-info'><i class='fas fa-search'></i></a>
-                                                                <a href='#' class='btn btn-danger'><i class='fas fa-edit'></i></a>
+                                                                <a href='editar_pedido.php?id=" . $row['idPedido'] . "' class='btn btn-danger'><i class='fas fa-edit'></i></a>
                                                             </td>";
                                                             echo "</tr>";
                                                         }
@@ -124,9 +126,15 @@ if ($conn->connect_error) {
                                 <div class="card">
                                     <div class="card-header border-transparent">
                                         <h3 class="card-title">Clientes</h3>
-                                        <a href="agregar_cliente.php" class="btn btn-success float-right">
-                                            <i class="fas fa-plus"></i>
-                                        </a>
+                                        <<<<<<< HEAD <a
+                                            href="http://190.114.204.8/phpuser/db_grupo1/agregar_cliente.php"
+                                            class="btn btn-success float-right">
+                                            =======
+                                            <a href="http://190.114.204.8/phpuser/db_grupo1/agregar_cliente.php"
+                                                class="btn btn-success float-right">
+                                                >>>>>>> ed06b03127617850f0717a0400f7d80bdfd0f5b9
+                                                <i class="fas fa-plus"></i>
+                                            </a>
                                     </div>
                                     <!-- /.card-header -->
                                     <div class="card-body p-0">
@@ -157,7 +165,7 @@ if ($conn->connect_error) {
                                                             echo "<td>" . $rowClientes['dni'] . "</td>";
                                                             echo "<td>
                                                                 <a href='#' class='btn btn-info'><i class='fas fa-search'></i></a>
-                                                                <a href='#' class='btn btn-danger'><i class='fas fa-edit'></i></a>
+                                                                <a href='editar_cliente.php?id=" . $rowClientes['idCliente'] . "' class='btn btn-danger'><i class='fas fa-edit'></i></a>
                                                             </td>";
                                                             echo "</tr>";
                                                         }
