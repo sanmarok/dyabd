@@ -14,9 +14,9 @@ if ($conn->connect_error) {
   die("Conexión a la base de datos fallida: " . $conn->connect_error);
 }
 
-$query = "SELECT * FROM clientes";
-$clientes = $conn->query($query);
+
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -37,26 +37,23 @@ $clientes = $conn->query($query);
 <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
   <div class="wrapper">
     <!-- Navbar -->
-    <!-- Navbar -->
     <nav class="main-header navbar navbar-expand navbar-dark" style="margin-left: 0;">
       <!-- Left navbar links -->
-      <ul class=" navbar-nav">
+      <ul class="navbar-nav">
         <li class="nav-item d-none d-sm-inline-block">
           <a href="index.php" class="nav-link">Inicio</a>
         </li>
       </ul>
     </nav>
 
-
     <!-- Sidebar Menu -->
     <nav class="mt-2">
       <li class="nav-item">
         <a href="#" class="nav-link">
-          <p>
-          </p>
+          <p></p>
         </a>
+      </li>
     </nav>
-
     <!-- /.sidebar-menu -->
   </div>
   <!-- /.sidebar -->
@@ -94,16 +91,16 @@ $clientes = $conn->query($query);
                     <label for="idCliente">Clientes</label>
                     <select class="form-control" name="idCliente" id="idCliente">
                       <option value="">Seleccione un cliente</option>
-                      <?php while ($cliente = $clientes->fetch_assoc()) { ?>
-                        <option value="<?php echo $cliente['idCliente']; ?>">
-                          <?php echo $cliente['nombres'] . "" . $cliente['apellidos'] ?>
-                        </option>
-                      <?php } ?>
+                      <?php
+                      $resultClientes = $conn->query('SELECT * FROM Clientes');
+                      while ($rowClientes = $resultClientes->fetch_assoc()) {
+                        echo '<option value=' . $rowClientes['idCliente'] . '>' . $rowClientes['nombres'] . " " . $rowClientes['apellidos'] . '</option>';
+                      } ?>
                     </select>
                   </div>
                   <div class="form-group">
                     <label for="direccion_pedido">Direccion</label>
-                    <input type="text" class="form-control" name="direccion_pedido" id="direccion_pedido" placeholder="Ingrese la direccion del pedido">
+                    <input type="text" class="form-control" name="direccion_pedido" id="direccion_pedido" placeholder="Ingrese la dirección del pedido">
                   </div>
                   <div class="form-group">
                     <label for="fecha_pedido">Fecha</label>
@@ -111,7 +108,7 @@ $clientes = $conn->query($query);
                   </div>
                   <div class="form-group">
                     <label for="estado_pedido">Estado</label>
-                    <select type="list" class="form-control" name="estado_pedido" id="estado_pedido" placeholder="Ingrese el estado del pedido">
+                    <select class="form-control" name="estado_pedido" id="estado_pedido">
                       <option value="Pendiente">Pendiente</option>
                       <option value="En proceso">En proceso</option>
                       <option value="Entregado">Entregado</option>
@@ -119,7 +116,7 @@ $clientes = $conn->query($query);
                   </div>
                   <div class="form-group">
                     <label for="detalle_pedido">Detalle</label>
-                    <input type="text" class="form-control" name="detalle_pedido" id="detalle_pedido" placeholder="">
+                    <input type="text" class="form-control" name="detalle_pedido" id="detalle_pedido" placeholder="Ingrese el detalle del pedido">
                   </div>
                 </div>
 
@@ -136,30 +133,28 @@ $clientes = $conn->query($query);
                   $detalle_pedido = $_POST['detalle_pedido'];
                   $idCliente = $_POST['idCliente'];
 
-                  $query = "INSERT INTO pedidos(direccion, fecha_pedido,estado,detalle,IdCliente) 
+                  $query = "INSERT INTO pedidos(direccion, fecha_pedido, estado, detalle, IdCliente) 
                   VALUES ('$direccion_pedido','$fecha_pedido','$estado_pedido','$detalle_pedido','$idCliente')";
                   $stmt = $conn->prepare($query);
                   if ($stmt->execute()) {
                     echo '<script>
                       Swal.fire({
-                        title: "Exito!",
-                        text: "Se agrego exitosamente el cliente.",
+                        title: "Éxito!",
+                        text: "Se agregó exitosamente el pedido.",
                         icon: "success"
                       });
-                      window.location: 
+                      window.location.href = "index.php";
                     </script>';
                   } else {
                     echo '<script>
                       Swal.fire({
                         title: "Error",
-                        text: "Hubo un error al intentar agregar al cliente.",
+                        text: "Hubo un error al intentar agregar el pedido.",
                         icon: "error"
                       });
-                      </script>';
-                    header("Location: http://localhost/dyabd/index.php");
+                    </script>';
                   }
                   $stmt->close();
-                  $conn->close();
                 }
                 ?>
               </form>
