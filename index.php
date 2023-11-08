@@ -68,8 +68,10 @@ if ($conn->connect_error) {
                                 <!-- TABLE: LATEST ORDERS - Primera Tabla -->
                                 <div class="card">
                                     <div class="card-header border-transparent">
-                                        <h3 class="card-title">Pedidos recientes</h3>
-                                        <a href="http://localhost/dyabd/agregar_pedido.php" class="btn btn-success float-right">
+
+
+                                        <a href="agregar_pedido.php" class="btn btn-success float-right">
+
                                             <i class="fas fa-plus"></i>
                                         </a>
                                     </div>
@@ -124,7 +126,11 @@ if ($conn->connect_error) {
                                 <div class="card">
                                     <div class="card-header border-transparent">
                                         <h3 class="card-title">Clientes</h3>
-                                        <a href="http://localhost/dyabd/agregar_cliente.php" class="btn btn-success float-right">
+
+                                       
+
+                                        <a href="agregar_cliente.php" class="btn btn-success float-right">
+
                                             <i class="fas fa-plus"></i>
                                         </a>
                                     </div>
