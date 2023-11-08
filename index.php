@@ -70,7 +70,7 @@ if ($conn->connect_error) {
                                 <div class="card">
                                     <div class="card-header border-transparent">
                                         <h3 class="card-title">Pedidos recientes</h3>
-                                        <a href="http://190.114.204.8/phpuser/db_grupo1/agregra_peido.php"
+                                        <a href="agregra_peido.php"
                                             class="btn btn-success float-right">
                                             <i class="fas fa-plus"></i>
                                         </a>
@@ -125,14 +125,14 @@ if ($conn->connect_error) {
                                 <!-- TABLE: LATEST ORDERS - Segunda Tabla -->
                                 <div class="card">
                                     <div class="card-header border-transparent">
-                                        <h3 class="card-title">Clientes</h3>
-                                        <a href="http://190.114.204.8/phpuser/db_grupo1/agregar_cliente.php"
-                                            class="btn btn-success float-right">
+                                        <h3 class="card-title">Clientes</h3>        
+                                        <a href="agregar_cliente.php" class="btn btn-success float-right">
+                                            <i class="fas fa-plus"></i>
                                         </a>
                                     </div>
                                     <!-- /.card-header -->
                                     <div class="card-body p-0">
-                                        <div class "table-responsive">
+                                        <div class = "table-responsive">
                                             <table class="table m-0">
                                                 <thead>
                                                     <tr>
@@ -173,7 +173,7 @@ if ($conn->connect_error) {
                                         <!-- /.table
 
                                         </div>
-                                        <!-- /.table-responsive -->
+                                        <!-table-responsive -->
                                     </div>
                                     <!-- /.card-body -->
                                 </div>
