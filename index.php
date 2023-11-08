@@ -4,8 +4,8 @@ header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
 
 $servername = "localhost";
-$username = "root";
-$password = "";
+$username = "admindb";
+$password = ".dbadmin";
 $database = "grupo1";
 
 $conn = new mysqli($servername, $username, $password, $database);
