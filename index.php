@@ -125,8 +125,8 @@ if ($conn->connect_error) {
 
                                                             echo '<td class="text-center"><a href="perfil_cliente.php?id=' . $row['idCliente'] . '" class="mx-2"><i class="fas fa-eye text-success"></i></a>' . "</td>";
                                                             echo "<td class='text-center'>
-                                                            <a href='perfil_pedido?id=" . $row['idPedido'] . "'><button class='btn btn-info mr-2'><i class='fas fa-search'></i></button></a>
-                                                            <a href='editar_pedido?id=" . $row['idPedido'] . "'><button class='btn btn-danger mr-2'><i class='fas fa-edit'></i></button></a>
+                                                            <a href='perfil_pedido.php?id=" . $row['idPedido'] . "'><button class='btn btn-info mr-2'><i class='fas fa-search'></i></button></a>
+                                                            <a href='editar_pedido.php?id=" . $row['idPedido'] . "'><button class='btn btn-danger mr-2'><i class='fas fa-edit'></i></button></a>
                                                             </td>";
                                                             echo "</tr>";
                                                         }
@@ -180,8 +180,8 @@ if ($conn->connect_error) {
                                                             echo "<td>" . $rowClientes['apellidos'] . "</td>";
                                                             echo "<td>" . $rowClientes['dni'] . "</td>";
                                                             echo "<td class='text-center'>
-                                                            <a href='perfil_cliente?id=" . $rowClientes['idCliente'] . "'><button class='btn btn-info mr-2'><i class='fas fa-search'></i></button></a>
-                                                            <a href='editar_cliente?id=" . $rowClientes['idCliente'] . "'><button class='btn btn-danger mr-2'><i class='fas fa-edit'></i></button></a>
+                                                            <a href='perfil_cliente.php?id=" . $rowClientes['idCliente'] . "'><button class='btn btn-info mr-2'><i class='fas fa-search'></i></button></a>
+                                                            <a href='editar_cliente.php?id=" . $rowClientes['idCliente'] . "'><button class='btn btn-danger mr-2'><i class='fas fa-edit'></i></button></a>
                                                             </td>";
                                                             echo "</tr>";
                                                         }
