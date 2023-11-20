@@ -30,6 +30,10 @@ if ($conn->connect_error) {
     <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="dist/css/adminlte.min.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
 </head>
 
 <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
@@ -66,23 +70,23 @@ if ($conn->connect_error) {
                         <div class="row">
                             <div class="col-md-6">
                                 <!-- TABLE: LATEST ORDERS - Primera Tabla -->
-                                <div class="card">
+                                <div class="card card-primary">
                                     <div class="card-header border-transparent">
-                                        <h3 class="card-title">Pedidos recientes</h3>
+                                        <h3 class="card-title p-auto">Pedidos recientes</h3>
                                         <a href="agregar_pedido.php" class="btn btn-success float-right">
                                             <i class="fas fa-plus"></i>
                                         </a>
                                     </div>
                                     <!-- /.card-header -->
-                                    <div class="card-body p-0">
-                                        <div class="table-responsive">
-                                            <table class="table m-0">
+                                    <div class="card-body">
+                                        <div>
+                                            <table id="example1" class="table table-bordered table-striped">
                                                 <thead>
                                                     <tr>
-                                                        <th>ID</th>
+                                                        <th>ID Pedido</th>
                                                         <th>Direccion</th>
                                                         <th>Estado</th>
-                                                        <th>ID Cliente</th>
+                                                        <th>Cliente</th>
                                                         <th>Acciones</th>
                                                     </tr>
                                                 </thead>
@@ -96,18 +100,36 @@ if ($conn->connect_error) {
                                                     if ($result->num_rows > 0) {
                                                         while ($row = $result->fetch_assoc()) {
                                                             echo "<tr>";
-                                                            echo "<td><a href='pages/examples/invoice.html'>" . $row['idPedido'] . "</a></td>";
+                                                            echo "<td>" . $row['idPedido'] . "</td>";
                                                             echo "<td>" . $row['direccion'] . "</td>";
-                                                            echo "<td><span class='badge badge-success'>" . $row['estado'] . "</span></td>";
-                                                            echo "<td>" . $row['idCliente'] . "</td>";
-                                                            echo "<td>
-                                                                <a href='#' class='btn btn-info'><i class='fas fa-search'></i></a>
-                                                                <a href='#' class='btn btn-danger'><i class='fas fa-edit'></i></a>
+                                                            $estado = $row['estado'];
+                                                            $colorBadge = '';
+
+                                                            switch ($estado) {
+                                                                case 'Pendiente':
+                                                                    $colorBadge = 'badge-warning';
+                                                                    break;
+                                                                case 'En Proceso':
+                                                                    $colorBadge = 'badge-info';
+                                                                    break;
+                                                                case 'Entregado':
+                                                                    $colorBadge = 'badge-success';
+                                                                    break;
+                                                                default:
+                                                                    $colorBadge = 'badge-secondary';
+                                                                    break;
+                                                            }
+
+                                                            echo "<td><span class='badge $colorBadge'>$estado</span></td>";
+
+                                                            echo '<td class="text-center"><a href="perfil_cliente.php?id=' . $row['idCliente'] . '" class="mx-2"><i class="fas fa-eye text-success"></i></a>' . "</td>";
+                                                            echo "<td class='text-center'>
+                                                            <a href='perfil_pedido?id=" . $row['idPedido'] . "'><button class='btn btn-info mr-2'><i class='fas fa-search'></i></button></a>
+                                                            <a href='editar_pedido?id=" . $row['idPedido'] . "'><button class='btn btn-danger mr-2'><i class='fas fa-edit'></i></button></a>
                                                             </td>";
                                                             echo "</tr>";
                                                         }
                                                     } else {
-                                                        echo "No se encontraron resultados.";
                                                     }
                                                     ?>
                                                 </tbody>
@@ -121,17 +143,17 @@ if ($conn->connect_error) {
                             </div>
                             <div class="col-md-6">
                                 <!-- TABLE: LATEST ORDERS - Segunda Tabla -->
-                                <div class="card">
+                                <div class="card card-primary">
                                     <div class="card-header border-transparent">
-                                        <h3 class="card-title">Clientes</h3>
+                                        <h3 class="card-title p-auto">Clientes</h3>
                                         <a href="agregar_cliente.php" class="btn btn-success float-right">
                                             <i class="fas fa-plus"></i>
                                         </a>
                                     </div>
                                     <!-- /.card-header -->
-                                    <div class="card-body p-0">
-                                        <div class "table-responsive">
-                                            <table class="table m-0">
+                                    <div class="card-body">
+                                        <div>
+                                            <table id="example2" class="table table-bordered table-striped">
                                                 <thead>
                                                     <tr>
                                                         <th>ID Cliente</th>
@@ -155,9 +177,9 @@ if ($conn->connect_error) {
                                                             echo "<td>" . $rowClientes['nombres'] . "</td>";
                                                             echo "<td>" . $rowClientes['apellidos'] . "</td>";
                                                             echo "<td>" . $rowClientes['dni'] . "</td>";
-                                                            echo "<td>
-                                                                <a href='#' class='btn btn-info'><i class='fas fa-search'></i></a>
-                                                                <a href='#' class='btn btn-danger'><i class='fas fa-edit'></i></a>
+                                                            echo "<td class='text-center'>
+                                                            <a href='perfil_cliente?id=" . $rowClientes['idCliente'] . "'><button class='btn btn-info mr-2'><i class='fas fa-search'></i></button></a>
+                                                            <a href='editar_cliente?id=" . $rowClientes['idCliente'] . "'><button class='btn btn-danger mr-2'><i class='fas fa-edit'></i></button></a>
                                                             </td>";
                                                             echo "</tr>";
                                                         }
@@ -213,11 +235,33 @@ if ($conn->connect_error) {
     <script src="plugins/jquery-mapael/maps/usa_states.min.js"></script>
     <!-- ChartJS -->
     <script src="plugins/chart.js/Chart.min.js"></script>
-
-    <!-- AdminLTE for demo purposes -->
-    <script src="dist/js/demo.js"></script>
-    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <script src="dist/js/pages/dashboard2.js"></script>
+    <!-- DataTables & Plugins -->
+    <script src="plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="plugins/jszip/jszip.min.js"></script>
+    <script src="plugins/pdfmake/pdfmake.min.js"></script>
+    <script src="plugins/pdfmake/vfs_fonts.js"></script>
+    <script src="plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="plugins/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+    <script>
+        $(function() {
+            $("#example1").DataTable({
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+            $("#example2").DataTable({
+                "responsive": true,
+                "lengthChange": false,
+                "autoWidth": false,
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        });
+    </script>
 </body>
 
 </html>
