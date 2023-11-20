@@ -4,8 +4,8 @@ header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type");
 
 $servername = "localhost";
-$username = "dbadmin";
-$password = ".admindb";
+$username = "root";
+$password = "";
 $database = "grupo1";
 
 $conn = new mysqli($servername, $username, $password, $database);
@@ -74,6 +74,7 @@ if ($conn->connect_error) {
                                     <div class="card-header border-transparent">
                                         <h3 class="card-title p-auto">Pedidos recientes</h3>
                                         <a href="agregar_pedido.php" class="btn btn-success float-right">
+
                                             <i class="fas fa-plus"></i>
                                         </a>
                                     </div>
@@ -147,6 +148,7 @@ if ($conn->connect_error) {
                                     <div class="card-header border-transparent">
                                         <h3 class="card-title p-auto">Clientes</h3>
                                         <a href="agregar_cliente.php" class="btn btn-success float-right">
+
                                             <i class="fas fa-plus"></i>
                                         </a>
                                     </div>
@@ -193,7 +195,7 @@ if ($conn->connect_error) {
                                         <!-- /.table
 
                                         </div>
-                                        <!-- /.table-responsive -->
+                                        <!-table-responsive -->
                                     </div>
                                     <!-- /.card-body -->
                                 </div>
