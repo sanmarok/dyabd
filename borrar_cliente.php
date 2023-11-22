@@ -1,8 +1,8 @@
 <?php
 // Configuración de la conexión a la base de datos
 $servername = "localhost";
-$username = "root";
-$password = "";
+$username = "dbadmin";
+$password = ".admindb";
 $database = "grupo1";
 
 // Crear conexión

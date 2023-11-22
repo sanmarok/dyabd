@@ -75,9 +75,9 @@ if ($conn->connect_error) {
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
-        <div class="row">
-          <!-- left column -->
-          <div class="col-md-6">
+       <div class="row justify-content-center align-items-center" style="min-height: 65vh;">
+        <!-- Use an inline style for margin-left -->
+            <div class="col-md-6" style="margin-right: 280px;">
             <!-- general form elements -->
             <div class="card card-primary">
               <div class="card-header">
